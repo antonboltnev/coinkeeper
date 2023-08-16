@@ -1,6 +1,13 @@
 <template>
   <ion-page>
     <ion-content :fullscreen="true">
+      <ion-header>
+        <ion-toolbar>
+          <ion-button @click="goToAuth">
+            <ion-icon slot="icon-only" :icon="personOutline"></ion-icon>
+          </ion-button>
+        </ion-toolbar>
+      </ion-header>
       <ion-card>
         <ion-card-header>
           <ion-row class="ion-align-items-center">
@@ -99,7 +106,9 @@
 
 <script setup>
 import { computed, ref, onMounted } from "vue";
+import { personOutline } from "ionicons/icons";
 import { userStore } from "@/store/user.js";
+import { useRouter } from "vue-router";
 
 const store = userStore()
 
@@ -136,6 +145,12 @@ const addFunds = () => {
   record.value = {}
 
   dismiss()
+}
+
+const router = useRouter()
+
+const goToAuth = () => {
+  router.push({ name: 'Auth' })
 }
 
 

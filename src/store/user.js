@@ -1,5 +1,5 @@
 import { defineStore} from "pinia";
-import { dataBase } from '@/firebase.js'
+import { dataBase, auth } from '@/firebase.js'
 
 import { doc, updateDoc, arrayUnion, getDoc } from "firebase/firestore";
 
@@ -10,7 +10,7 @@ export const userStore = defineStore('user', {
 
     actions: {
         async fetchDataFromDB() {
-            const docRef = doc(dataBase, "users", "GxAT1DN3HaKm1YInSAnY");
+            const docRef = doc(dataBase, "users", auth.currentUser.uid);
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
@@ -26,12 +26,16 @@ export const userStore = defineStore('user', {
         async addRecordToStore(record) {
             this.records.push(record)
 
-            const recordReference = doc(dataBase, "users", "GxAT1DN3HaKm1YInSAnY");
+            const recordReference = doc(dataBase, "users", auth.currentUser.uid);
 
 // Atomically add a new region to the "regions" array field.
             await updateDoc(recordReference, {
                 records: arrayUnion(record)
             });
+        },
+
+        clearData() {
+            this.records = []
         }
     }
 })
