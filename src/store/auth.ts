@@ -14,6 +14,7 @@ export const useAuthStore = defineStore('auth', {
     }),
     actions: {
         register(user: any) {
+            console.log('Something!')
             createUserWithEmailAndPassword(auth, user.email, user.password)
                 .then(async (userCredential) => {
                     // Signed in
