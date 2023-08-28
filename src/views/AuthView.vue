@@ -55,6 +55,8 @@ const store = userStore()
 
 const router = useRouter()
 
+console.log('123')
+
 const authenticate = async () => {
   if (isRegistering.value) {
    await authStore.register(userCredentials.value)
