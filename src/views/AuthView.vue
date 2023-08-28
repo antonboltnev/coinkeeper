@@ -57,6 +57,7 @@ const router = useRouter()
 
 console.log(123123)
 console.log(887878768)
+console.log(321123)
 
 const authenticate = async () => {
   if (isRegistering.value) {
